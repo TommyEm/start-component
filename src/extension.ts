@@ -26,7 +26,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const componentName = await vscode.window.showInputBox();
 
-			if (componentName === undefined) return;
+			if (componentName === undefined) {
+				return;
+			}
 
 			const componentFolderName = componentName;
 			const cssFileName = camelCase(componentName);
