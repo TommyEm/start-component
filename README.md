@@ -4,6 +4,13 @@
 
 This VS Code extension creates boilerplate files for creating a new React component.
 
+## Installation
+
+The extension is yet unpublished on the VS Code extension marketplace. To install it manually:
+
+-   Download the `.vsix` file from [this page](https://github.com/TommyEm/start-component/releases/tag/0.0.1)
+-   Open VS Code and go to the Extensions panel. From the menu on the top-right corner, select `Install from VSIX...` and select the downloaded file.
+
 ## Usage
 
 Right-click on a folder in the Explorer sidebar and select `Start Component`. Inside the following prompt, just enter the name of the component. Boilerplate files will be created in a sub-folder.
