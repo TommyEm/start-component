@@ -21,7 +21,7 @@ interface IProps {
 }
 
 export const ${componentName} = ({ className, children, testId }: IProps) => {
-  const css = getClasses(['${componentName}']);
+  const css = getClasses(['${componentName}', className]);
 
   return (
     <div className={css} data-testid={testId}>
@@ -39,42 +39,43 @@ export const createCssFileContent = (componentName: string) => `.${componentName
 export const createStoriesFileContent = (
 	componentName: string,
 ) => `import { ${componentName} } from '@pasqal/core/ui/components/${componentName}/${componentName}';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
+const meta: Meta<typeof ${componentName}> {
   title: 'Components/${componentName}',
-  component: ${componentName},
+  component: ${componentName}
+};
+
+
+export default meta;
+type IStory = StoryObj<typeof ${componentName}>;
+
+export const Default: Story = {
+  args: {},
   parameters: {
-    zeplinLink: '',
+    design: [
+      {
+        type: 'Figma',
+        url: '',
+      },
+    ],
+  }
+}
+
+export const Hover: Story = {
+  args: {
+    ...Default.args,
   },
-} as ComponentMeta<typeof ${componentName}>;
-
-const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};
-Default.parameters = {
-  zeplinLink: [
-    {
-      name: 'Default',
-      link: '',
-    },
-  ],
-};
-
-export const Hover = Template.bind({});
-Hover.args = {
-  ...Default.args,
-};
-Hover.parameters = {
-  zeplinLink: [
-    {
-      name: 'Hover',
-      link: '',
-    },
-  ],
-  pseudo: {
-    hover: true,
-  },
-};
+  parameters: {
+    design: [
+      {
+        type: 'Figma',
+        url: '',
+      },
+    ],
+    pseudo: {
+      hover: true,
+    }
+  }
+}
 `;
