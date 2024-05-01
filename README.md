@@ -15,6 +15,12 @@ The extension is yet unpublished on the VS Code extension marketplace. To instal
 
 Right-click on a folder in the Explorer sidebar and select `Start Component`. Inside the following prompt, just enter the name of the component. Boilerplate files will be created in a sub-folder.
 
+## Development
+
+-   Test the extension by running `F5` ([doc](https://code.visualstudio.com/api/get-started/your-first-extension))
+-   Build the package by running `vsce package` ([doc](https://code.visualstudio.com/api/working-with-extensions/publishing-extension))
+-   Publish on VS Code extension store by running `vsce publish`
+
 ## Release Notes
 
 ### 0.0.1

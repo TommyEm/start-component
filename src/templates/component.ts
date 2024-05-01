@@ -2,64 +2,54 @@ import { camelCase } from '../helpers/data';
 
 export const createIndexFileContent = (
 	componentName: string,
-) => `import { ${componentName} } from './${componentName}';
-
-export default ${componentName};
+) => `export { ${componentName} } from './${componentName}';
 `;
 
 export const createComponentFileContent = (
 	componentName: string,
-) => `import { getClasses } from '@pasqal/core/helpers/styles';
-import type { ReactNode } from 'react';
+) => `import { Styled${componentName} } from "./${componentName}.styled";
 
-import '@pasqal/core/ui/components/${componentName}/${camelCase(componentName)}.css';
-
-interface IProps {
+interface I${componentName}Props {
   className?: string;
   children: ReactNode;
-  testId?: string;
 }
 
-export const ${componentName} = ({ className, children, testId }: IProps) => {
-  const css = getClasses(['${componentName}', className]);
-
+export const ${componentName} = ({ className, children }: I${componentName}Props) => {
   return (
-    <div className={css} data-testid={testId}>
+    <Styled${componentName} className={\`${componentName} \${className}\`>
       {children}
-    </div>
+    </Styled${componentName}>
   );
 };
 `;
 
-export const createCssFileContent = (componentName: string) => `.${componentName} {
+export const createStyledComponentFileContent = (
+	componentName: string,
+) => `import styled from 'styled-components';
 
-}
+export const StyledButton = 'styled.button';
 `;
 
 export const createStoriesFileContent = (
 	componentName: string,
-) => `import { ${componentName} } from '@pasqal/core/ui/components/${componentName}/${componentName}';
-import type { Meta, StoryObj } from '@storybook/react';
+) => `import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { ${componentName} } from './${componentName}';
 
 const meta: Meta<typeof ${componentName}> {
   title: 'Components/${componentName}',
-  component: ${componentName}
+  component: ${componentName},
+  args: {
+    onClick: action("Click"),
+  },
 };
 
-
 export default meta;
-type IStory = StoryObj<typeof ${componentName}>;
+
+type Story = StoryObj<typeof ${componentName}>;
 
 export const Default: Story = {
   args: {},
-  parameters: {
-    design: [
-      {
-        type: 'Figma',
-        url: '',
-      },
-    ],
-  }
 }
 
 export const Hover: Story = {
@@ -67,12 +57,6 @@ export const Hover: Story = {
     ...Default.args,
   },
   parameters: {
-    design: [
-      {
-        type: 'Figma',
-        url: '',
-      },
-    ],
     pseudo: {
       hover: true,
     }

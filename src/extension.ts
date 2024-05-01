@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import { camelCase } from './helpers/data';
 import {
 	createComponentFileContent,
-	createCssFileContent,
+	createStyledComponentFileContent,
 	createIndexFileContent,
 	createStoriesFileContent,
 } from './templates/component';
@@ -31,8 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			const componentFolderName = componentName;
-			const cssFileName = camelCase(componentName);
-			console.log(cssFileName);
+			const styledFileName = `Styled${camelCase(componentName)}`;
+			console.log(styledFileName);
 
 			const indexFileUri = vscode.Uri.file(
 				`${folder.path}/${componentFolderName}/index.tsx`,
@@ -40,8 +40,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const componentFileUri = vscode.Uri.file(
 				`${folder.path}/${componentFolderName}/${componentName}.tsx`,
 			);
-			const cssFileUri = vscode.Uri.file(
-				`${folder.path}/${componentFolderName}/${cssFileName}.css`,
+			const styledFileUri = vscode.Uri.file(
+				`${folder.path}/${componentFolderName}/${styledFileName}.tsx`,
 			);
 			const storiesFileUri = vscode.Uri.file(
 				`${folder.path}/${componentFolderName}/${componentName}.stories.tsx`,
@@ -63,9 +63,13 @@ export function activate(context: vscode.ExtensionContext) {
 				createComponentFileContent(componentName),
 			);
 
-			// Create component.css
-			wsEdit.createFile(cssFileUri, { ignoreIfExists: true });
-			wsEdit.insert(cssFileUri, pos, createCssFileContent(componentName));
+			// Create StyledComponent.tsxcss
+			wsEdit.createFile(styledFileUri, { ignoreIfExists: true });
+			wsEdit.insert(
+				styledFileUri,
+				pos,
+				createStyledComponentFileContent(componentName),
+			);
 
 			// Create Component.stories.tsx
 			wsEdit.createFile(storiesFileUri, { ignoreIfExists: true });
