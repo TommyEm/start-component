@@ -11,12 +11,12 @@ export const createComponentFileContent = (
 
 interface I${componentName}Props {
   className?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const ${componentName} = ({ className, children }: I${componentName}Props) => {
   return (
-    <Styled${componentName} className={\`${componentName} \${className}\`>
+    <Styled${componentName} className={\`${componentName} \${className}\`}>
       {children}
     </Styled${componentName}>
   );
@@ -27,21 +27,23 @@ export const createStyledComponentFileContent = (
 	componentName: string,
 ) => `import styled from 'styled-components';
 
-export const StyledButton = 'styled.button';
+export const Styled${componentName} = styled.div\`
+
+\`
 `;
 
 export const createStoriesFileContent = (
 	componentName: string,
 ) => `import type { Meta, StoryObj } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+// import { action } from "@storybook/addon-actions";
 import { ${componentName} } from './${componentName}';
 
-const meta: Meta<typeof ${componentName}> {
+const meta: Meta<typeof ${componentName}> = {
   title: 'Components/${componentName}',
   component: ${componentName},
-  args: {
-    onClick: action("Click"),
-  },
+  // args: {
+    // onClick: action("Click"),
+  // },
 };
 
 export default meta;

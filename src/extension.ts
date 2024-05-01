@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			const componentFolderName = componentName;
-			const styledFileName = `Styled${camelCase(componentName)}`;
+			const styledFileName = componentName;
 			console.log(styledFileName);
 
 			const indexFileUri = vscode.Uri.file(
@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
 				`${folder.path}/${componentFolderName}/${componentName}.tsx`,
 			);
 			const styledFileUri = vscode.Uri.file(
-				`${folder.path}/${componentFolderName}/${styledFileName}.tsx`,
+				`${folder.path}/${componentFolderName}/${styledFileName}.styled.tsx`,
 			);
 			const storiesFileUri = vscode.Uri.file(
 				`${folder.path}/${componentFolderName}/${componentName}.stories.tsx`,
