@@ -1,4 +1,4 @@
-import { camelCase } from '../helpers/data';
+// import { camelCase } from '../helpers/data';
 
 export const createIndexFileContent = (
 	componentName: string,
@@ -9,12 +9,12 @@ export const createComponentFileContent = (
 	componentName: string,
 ) => `import { Styled${componentName} } from "./${componentName}.styled";
 
-interface I${componentName}Props {
+interface ${componentName}Props {
   className?: string;
   children: React.ReactNode;
 }
 
-export const ${componentName} = ({ className, children }: I${componentName}Props) => {
+export const ${componentName} = ({ className, children }: ${componentName}Props) => {
   return (
     <Styled${componentName} className={\`${componentName} \${className}\`}>
       {children}
